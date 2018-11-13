@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="logTask" class="kr.or.ddit.util.SpringTask"/>
+	
+	<task:scheduler id="scheduler"/>
+	<task:scheduled-tasks scheduler="scheduler">
+		<task:scheduled ref="springTask" method="logging" cron="*/5 * * * * *"/>
+		<task:scheduled ref="springTask" method="makeMonthlyCalendar" 
+										cron="0 0 23 L * *"/>
+										<!--  초  분  시  일  월  요일 -->
+										<!--  매달 마지막 날 23시에 실행 -->
+										
+										<!-- 매달 1일  -->
+	</task:scheduled-tasks>
+
+</beans>
